@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmcdmiacbbnvr"]
+
+[ext_resource type="PackedScene" uid="uid://kicjwmh02uwf" path="res://scenes/player.tscn" id="1_4386p"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_fgaup"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bq8iw"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lqg7a"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v786b"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bq8iw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_lqg7a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.816954, 0.576703, 0, -0.576703, 0.816954, 0, 1.4941, 1.88459)
+
+[node name="Player" parent="." instance=ExtResource("1_4386p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0673471, 1.13414, 1.78077)
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("2_fgaup")]
+
+[node name="jumpbutton" type="TouchScreenButton" parent="."]
+position = Vector2(913, 394)
+scale = Vector2(4.61, 4.61)
+shape = SubResource("CircleShape2D_v786b")
